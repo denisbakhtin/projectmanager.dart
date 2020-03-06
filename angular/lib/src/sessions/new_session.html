@@ -1,0 +1,65 @@
+<h3 class="title">New Session</h3>
+<div class="project" *ngFor="let p of projects">
+    <div class="spent-report-box dashboard-box mb-4">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    <a class="strong" [routerLink]="projectUrl(p)">{{p.title}} <small class="text-muted">project</small></a>
+                </th>
+                <th class="shrink"></th>
+                <th class="shrink">
+                  <material-toggle [checked]="projectIsCommited(p)" (checkedChange)="onProjectToggle(p, $event)">
+                  </material-toggle>  
+                </th>
+            </tr>
+            <tr>
+                <th>Task</th>
+                <th class="shrink">Spent</th>
+                <th class="shrink">Add</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let t of p.tasks">
+                <td><a [routerLink]="taskUrl(t)">{{t.contents}}</a></td>
+                <td class="shrink">{{t.spentTotal}}</td>
+                <td class="shrink">
+                  <material-toggle [checked]="taskIsCommited(t)" (checkedChange)="onTaskToggle(t, $event)">
+                  </material-toggle>
+                </td>
+            </tr>
+            <tfoot>
+            <tr>
+                <th>Total spent</th>
+                <th class="shrink">{{p.spentTotal}}</th>
+                <th class="shrink">
+                    {{commitedByProject(p)}}
+                </th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="dashboard-box spent-total">
+    <table class="w-100">
+        <tr>
+            <td>
+                Total spent time to commit
+            </td>
+            <td class="shrink strong">
+                {{session.spentCalculated().toStringFull()}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<p *ngIf="error != null" class="error mt-3">{{ error }}</p>
+
+<div class="my-25">
+    <material-button 
+        raised
+        (click)="submit()" 
+        class="btn btn-primary">
+        <i class="fa fa-check mr-2"></i>Submit
+    </material-button>
+</div>

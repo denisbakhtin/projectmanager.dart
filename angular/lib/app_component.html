@@ -1,0 +1,41 @@
+<header class="page-header">
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+        <a class="navbar-brand" href="#">Task Manager</a>
+        <!-- removed toggle button -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul *ngIf="store.isAuthenticated" class="navbar-nav ml-auto">
+                <li class="divider"></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-bell-o"></i><span class="badge badge-primary badge-pill">7</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa fa-envelope-o"></i><span class="badge badge-primary badge-pill">12</span></a>
+                </li>
+                <li class="divider"></li>
+                <li class="nav-widget">
+                    <a class="user-photo" href="#"><i class="fa fa-user"></i></a>
+                </li>
+            </ul>
+            <ul *ngIf="!store.isAuthenticated" class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacts</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div *ngIf="store.isAuthenticated" class="content-with-sidebar">
+    <sidebar></sidebar>
+    <div class="page-content">
+        <router-outlet [routes]="Routes.all"></router-outlet>
+    </div>
+</div>
+<div *ngIf="!store.isAuthenticated" class="content-without-sidebar">
+    <div class="page-content">
+        <router-outlet [routes]="Routes.all"></router-outlet>
+    </div>
+</div>
+<active-task></active-task>

@@ -1,0 +1,76 @@
+<div class="container auth-form-wrapper">
+    <div class="auth-card">
+        <form #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="card-content">
+                <div class="welcome">
+                    <h2 class="title">Let's create your account!</h2>
+                    <span>Already have an account? <material-button flat class="" (trigger)="router.navigate(RoutePaths.login.toUrl())">Log In!</material-button></span>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                        </div>
+                        <input 
+                            type="email"
+                            class="form-control" 
+                            #email="ngForm"
+                            [class.is-valid]="email.dirty && email.valid" 
+                            [class.is-invalid]="email.dirty && !email.valid" 
+                            placeholder="Email Address" 
+                            [(ngModel)]="register.email" 
+                            ngControl="email" 
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        </div>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Password" 
+                            #password="ngForm"
+                            [class.is-valid]="password.dirty && password.valid" 
+                            [class.is-invalid]="password.dirty && !password.valid" 
+                            [(ngModel)]="register.password" 
+                            ngControl="password" 
+                            required
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                        </div>
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            placeholder="Repeat Password" 
+                            #rpassword="ngForm"
+                            [class.is-valid]="rpassword.dirty && rpassword.valid" 
+                            [class.is-invalid]="rpassword.dirty && !rpassword.valid" 
+                            [(ngModel)]="register.repeatPassword" 
+                            ngControl="rpassword" 
+                            required
+                        />
+                    </div>
+                </div>
+                <p *ngIf="error != null" class="error">{{ error }}</p>
+            </div>
+            <div class="actions">
+                <material-button 
+                    [disabled]="!form.valid" 
+                    raised
+                    class="btn btn-primary btn-round full-width" 
+                    (trigger)="onSubmit()">
+                    Register
+                </material-button>
+            </div>
+        </form>
+    </div>
+</div>

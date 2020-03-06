@@ -1,0 +1,59 @@
+<li class="{{helpers.classPriority(task.priority)}}">
+    <div class="item-description">
+        <h3 class="item-title">
+            <a [routerLink]="taskUrl()">{{task.contents}}</a>
+            <a *ngIf="task.category?.title != null" [routerLink]="categoryUrl(task.category)" class="badge badge-secondary"><i class="fa fa-tag mr-1"></i>{{task.category.title}}</a>
+            <span *ngIf="!task.completed" class="badge">Open</span>
+            <span *ngIf="task.completed" class="badge badge-default">Closed</span>
+        </h3>
+        <div class="dates">
+            <span class="created-at date"><span class="fa fa-calendar"></span>Created on {{helpers.dateString(task.createdAt)}}</span>
+            <span class="expires-at date ml-3"><span class="fa fa-calendar"></span>Expires on {{helpers.dateString(task.createdAt)}}</span>
+            <span *ngIf="task.spentTotal.inMinutes > 0" class="time-spent ml-3" title="Total time spent"><span class="fa fa-clock-o"></span>{{task.spentTotal.toStringFull()}}</span>
+        </div>
+    </div>
+    <div class="buttons">
+        <material-button class="btn btn-primary btn-round" raised (trigger)="run()">
+            <i class="fa fa-play mr-2"></i> Start
+        </material-button>
+        <material-button 
+            class="btn btn-default btn-round" 
+            (trigger)="view()">
+            Details
+            <span *ngIf="task.comments.length > 0" class="comments-count ml-2 text-muted"><i class="fa fa-comments"></i>{{task.comments.length}}</span>
+        </material-button>
+        <material-button 
+            icon 
+            class="btn btn-default" 
+            title="Edit"
+            (trigger)="startEdit()">
+            <i class="fa fa-edit"></i>
+        </material-button>
+        <material-button
+            icon 
+            class="btn btn-default"
+            title="Add comment"
+            (trigger)="startCreateComment()">
+            <i class="fa fa-commenting-o"></i>
+        </material-button>
+        <material-button
+            *ngIf="!task.completed"
+            icon 
+            class="btn btn-primary"
+            title="Close task"
+            (trigger)="startSolutionComment()">
+            <i class="fa fa-check"></i>
+        </material-button>
+        <material-button 
+            icon 
+            class="btn btn-default" 
+            title="Delete"
+            (trigger)="delete()">
+            <i class="fa fa-trash-o"></i>
+        </material-button>
+    </div>
+</li>
+
+<edit-task-modal *ngIf="showEditModal" [id]="task.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-task-modal>
+<edit-comment-modal *ngIf="showCreateCommentModal" [taskId]="task.id" [onSubmitCallback]="submitCreateComment" [onCancelCallback]="cancelCreateComment"></edit-comment-modal>
+<edit-comment-modal *ngIf="showCreateSolutionModal" [taskId]="task.id" [isSolution]="true" [onSubmitCallback]="submitSolutionComment" [onCancelCallback]="cancelSolutionComment"></edit-comment-modal>

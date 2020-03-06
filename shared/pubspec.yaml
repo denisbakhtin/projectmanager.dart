@@ -1,0 +1,12 @@
+name: projectmanager_shared
+description: Shared services and model for todo.
+version: 0.0.1
+author: stable|kernel <jobs@stablekernel.com>
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  http:
+  intl:
+  meta:

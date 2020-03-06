@@ -1,0 +1,24 @@
+<div *ngIf="category != null" class="category-page">
+    <breadcrumb [category]="category"></breadcrumb>
+    
+    <h3 class="title">
+        {{category.title}} 
+        <material-button 
+            class="ml-2 btn btn-sm btn-default" 
+            (trigger)="startEdit()">
+            Edit
+        </material-button>
+    </h3>
+
+    <h4 *ngIf="category.projects.length > 0">Projects</h4>
+    <ul *ngIf="category.projects.length > 0" class="dashboard-box project-box-list">
+        <projects-item *ngFor="let project of category.projects" [project]="project" [refreshList]="getCategory"></projects-item>
+    </ul>
+
+    <h4 *ngIf="category.tasks.length > 0">Tasks</h4>
+    <ul *ngIf="category.tasks.length > 0" class="dashboard-box task-box-list">
+        <tasks-item *ngFor="let task of category.tasks" [task]="task" [refreshList]="getCategory"></tasks-item>
+    </ul>
+</div>
+
+<edit-category-modal *ngIf="showEditModal && category != null" [id]="category.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-category-modal>

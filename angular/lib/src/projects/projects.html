@@ -1,0 +1,13 @@
+<breadcrumb [section]="'Projects'"></breadcrumb>
+
+<h3 class="title">Projects</h3>
+
+<ul *ngIf="projects.length > 0" class="dashboard-box project-box-list">
+    <projects-item *ngFor="let project of projects" [project]="project" [refreshList]="projectsService.getList"></projects-item>
+</ul>
+
+<div class="mt-25">
+    <material-button raised (trigger)="startCreate()" class="btn btn-primary btn-round"><i class="fa fa-plus mr-2"></i>Add Project</material-button>
+</div>
+
+<edit-project-modal *ngIf="showCreateModal" [onSubmitCallback]="submitCreate" [onCancelCallback]="cancelCreate"></edit-project-modal>

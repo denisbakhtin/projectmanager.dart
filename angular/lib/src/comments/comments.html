@@ -1,0 +1,44 @@
+<!-- shown on task component page -->
+
+<div class="my-25">
+    <material-button 
+        (click)="startCreate()" 
+        class="btn btn-primary">
+        <i class="fa fa-plus mr-2"></i>Add Comment
+    </material-button>
+</div>
+
+<ul *ngIf="comments.length > 0" class="dashboard-box comment-box-list">
+    <li *ngFor="let c of comments" [class.solution-comment]="c.isSolution">
+        <div class="item-description">
+            <h3 class="item-title">
+                {{c.contents}}
+                <span *ngIf="c.isSolution" class="badge">Solution</span>
+            </h3>
+            <div class="dates">
+                <span class="created-at date"><span class="fa fa-calendar"></span>Created on {{helpers.dateString(c.createdAt)}}</span>
+                <span class="updated-at date ml-3"><span class="fa fa-calendar"></span>Updated on {{helpers.dateString(c.updatedAt)}}</span>
+            </div>
+        </div>
+        <attachments [(attachments)]="c.attachments"></attachments>
+        <div class="buttons">
+            <material-button 
+                icon 
+                title="Edit"
+                class="btn btn-default" 
+                (trigger)="startEdit(c)">
+                <i class="fa fa-edit"></i>
+            </material-button>
+            <material-button 
+                icon 
+                title="Delete"
+                class="btn btn-default" 
+                (trigger)="delete(c)">
+                <i class="fa fa-trash-o"></i>
+            </material-button>
+        </div>
+    </li>
+</ul>
+
+<edit-comment-modal *ngIf="showCreateModal && task != null" [taskId]="task.id" [onSubmitCallback]="submitCreate" [onCancelCallback]="cancelCreate"></edit-comment-modal>
+<edit-comment-modal *ngIf="showEditModal && comment != null" [taskId]="task.id" [id]="comment.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-comment-modal>

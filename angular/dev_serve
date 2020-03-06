@@ -1,0 +1,1 @@
+webdev serve --auto=refresh -- --delete-conflicting-outputs

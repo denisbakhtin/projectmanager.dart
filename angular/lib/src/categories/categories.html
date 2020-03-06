@@ -1,0 +1,37 @@
+<breadcrumb [section]="'Categories'"></breadcrumb>
+
+<h3 class="title">Categories</h3>
+
+<ul *ngIf="categories.length > 0" class="dashboard-box category-box-list">
+    <li *ngFor="let category of categories">
+        <div class="item-description">
+            <h3 class="item-title">
+                <a [routerLink]="categoryUrl(category)">{{category.title}}</a>
+            </h3>
+        </div>
+        <div class="buttons">
+            <material-button class="btn btn-primary btn-round" raised (trigger)="view(category)">
+                Details 
+            </material-button>
+            <material-button 
+                icon 
+                class="btn btn-default" 
+                (trigger)="startEdit(category)">
+                <i class="fa fa-edit"></i>
+            </material-button>
+            <material-button 
+                icon 
+                class="btn btn-default" 
+                (trigger)="delete(category)">
+                <i class="fa fa-trash-o"></i>
+            </material-button>
+        </div>
+    </li>
+</ul>
+
+<div class="mt-25">
+    <material-button raised (trigger)="startCreate()" class="btn btn-primary btn-round"><i class="fa fa-plus mr-2"></i>Add Category</material-button>
+</div>
+
+<edit-category-modal *ngIf="showCreateModal" [onSubmitCallback]="submitCreate" [onCancelCallback]="cancelCreate"></edit-category-modal>
+<edit-category-modal *ngIf="showEditModal && category != null" [id]="category.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-category-modal>

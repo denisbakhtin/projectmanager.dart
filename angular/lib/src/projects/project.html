@@ -1,0 +1,32 @@
+<div *ngIf="project != null" class="project-page">
+    <breadcrumb [project]="project"></breadcrumb>
+    
+    <h3 class="title">
+        {{project.title}} 
+        <span class="small text-muted">project</span>
+        <a *ngIf="project.category != null" [routerLink]="categoryUrl(project.category)" class="badge badge-secondary"><i class="fa fa-tag mr-1"></i>{{project.category.title}}</a>
+        <material-button 
+            class="ml-2 btn btn-sm btn-default" 
+            (trigger)="startEdit()">
+            Edit
+        </material-button>
+    </h3>
+    <p *ngIf="project.spentTotal.inMinutes > 0" class="project-time-spent">
+        <i class="fa fa-clock-o mr-2"></i>Total time spent: {{project.spentTotal.toStringFull()}}
+    </p>
+
+    <p *ngIf="project.contents != null" class="project-contents">{{project.contents}}</p>
+    
+    <attachments [(attachments)]="project.attachments"></attachments>
+
+    <ul *ngIf="(project.tasks?.length??0) > 0" class="dashboard-box task-box-list">
+        <tasks-item *ngFor="let task of project.tasks" [task]="task" [refreshList]="tasksService.getList"></tasks-item>
+    </ul>
+
+    <div class="mt-20">
+        <material-button raised (trigger)="startCreate()" class="btn btn-primary btn-round"><i class="fa fa-plus mr-2"></i>Add Task</material-button>
+    </div>
+</div>
+
+<edit-task-modal *ngIf="showCreateModal && project != null" [projectId]="project.id" [onSubmitCallback]="submitCreate" [onCancelCallback]="cancelCreate"></edit-task-modal>
+<edit-project-modal *ngIf="showEditModal && project != null" [id]="project.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-project-modal>

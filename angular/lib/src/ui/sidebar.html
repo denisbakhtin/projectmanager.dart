@@ -1,0 +1,20 @@
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.projects.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-th-list"></i>Projects</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.tasks.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-list"></i>Tasks</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.categories.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-tags"></i>Categories</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.sessions.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-check"></i>Sessions</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.spentReport.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-bar-chart"></i>Spent Report</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" [routerLink]="RoutePaths.logout.toUrl()" [routerLinkActive]="'active'"><i class="fa fa-power-off"></i>Logout</a>
+    </li>
+</ul>

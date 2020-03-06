@@ -1,0 +1,37 @@
+<div *ngIf="task != null">
+
+    <breadcrumb [task]="task"></breadcrumb>
+    
+    <h3 class="title">
+        {{task.contents}}
+        <a *ngIf="task.category != null" [routerLink]="categoryUrl(task.category)" class="badge badge-secondary"><i class="fa fa-tag mr-1"></i>{{task.category.title}}</a>
+    </h3>
+    
+    <p *ngIf="task.spentTotal.inMinutes > 0" class="task-time-spent">
+        <i class="fa fa-clock-o mr-2"></i>Total time spent: {{task.spentTotal.toStringFull()}}
+    </p>
+
+    <div class="buttons">
+        <material-button class="btn btn-primary btn-round" raised (trigger)="run()">
+            <i class="fa fa-play mr-2"></i> Start
+        </material-button>
+        <material-button 
+            icon 
+            title="Edit"
+            class="btn btn-default" 
+            (trigger)="startEdit()">
+            <i class="fa fa-edit"></i>
+        </material-button>
+        <material-button 
+            icon 
+            title="Delete"
+            class="btn btn-default" 
+            (trigger)="delete()">
+            <i class="fa fa-trash-o"></i>
+        </material-button>
+    </div>
+    <attachments [(attachments)]="task.attachments"></attachments>
+    <comments [task]="task"></comments>
+</div>
+
+<edit-task-modal *ngIf="showEditModal" [id]="task.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-task-modal>

@@ -1,0 +1,25 @@
+name: projectmanager
+description: A Project Manager that uses AngularDart
+version: 0.0.1
+
+environment:
+  sdk: '>=2.7.0 <3.0.0'
+
+dependencies:
+  angular: 
+  angular_components:
+  angular_forms:
+  angular_router:
+  projectmanager_shared:
+    path: ../shared
+  filesize:
+
+dev_dependencies:
+  angular_test: 
+  build_runner: 
+  build_test: 
+  build_web_compilers:
+  test:
+  sass:
+  sass_builder:
+

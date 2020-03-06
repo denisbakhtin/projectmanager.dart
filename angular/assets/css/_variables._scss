@@ -1,0 +1,11 @@
+// Override Bootstrap Variables & Add Your Own
+$primary: #00BD89;
+$secondary: #795548;
+$navbar-dark-color: rgba(#fff, .8) !default;
+$navbar-dark-hover-color: rgba(#fff, .95) !default;
+
+// custom variables
+$restricted-navbar-height: 57px;
+$restricted-sidebar-width: 240px;
+$restricted-sidebar-narrow-width: 50px;
+$dropdown-background: #fafafa;

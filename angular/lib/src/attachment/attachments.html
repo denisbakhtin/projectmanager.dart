@@ -1,0 +1,39 @@
+<div *ngIf="canEdit">
+    <div *ngIf="attachments != null">
+        <ul class="file-attachments">
+            <li *ngFor="let att of attachments">
+                <a *ngIf="att.id != null" href="{{helpers.absoluteFileUri(att.url)}}" class="d-inline-block filename mr-1" download="" target="_blank">
+                    {{att.filename}}
+                </a>
+                <span *ngIf="att.id == null" class="filename d-inline-block mr-1">{{att.filename}}</span>
+                <span class="filesize d-inline-block mr-auto">({{filesize(att.size)}})</span>
+                <material-button 
+                    icon
+                    class="btn btn-default" 
+                    (trigger)="delete(att)">
+                    <i class="fa fa-times"></i>
+                </material-button>
+            </li>
+        </ul>
+    </div>
+    <div class="mt-3">
+        <label class="btn btn-default fileContainer">
+            <i class="fa fa-paperclip mr-1"></i> Attach file
+            <input type="file" (change)="handleUpload($event)"/>
+        </label>
+    </div>
+</div>
+
+<div *ngIf="!canEdit">
+    <div *ngIf="(attachments?.length??0)>0" class="file-attachments-inline-wrapper">
+        <i class="fa fa-paperclip mr-2"></i>
+        <ul class="file-attachments-inline">
+            <li *ngFor="let att of attachments">
+                <a href="{{helpers.absoluteFileUri(att.url)}}" download="" target="_blank">
+                    {{att.filename}}
+                </a>
+                <span class="filesize">({{filesize(att.size)}})</span>
+            </li>
+        </ul>
+    </div>
+</div>

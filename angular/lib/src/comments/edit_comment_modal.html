@@ -1,0 +1,47 @@
+<div class="modal edit-comment-modal show" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 *ngIf="!isNew" class="modal-title">Edit Comment</h5>
+        <h5 *ngIf="isNew && !isSolution" class="modal-title">New Comment</h5>
+        <h5 *ngIf="isNew && isSolution" class="modal-title">Task Solution</h5>
+        <button type="button" class="close" (click)="onCancel()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form *ngIf="comment != null" #form="ngForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label>Contents</label>
+                <textarea 
+                    type="text" 
+                    autofocus
+                    class="form-control" 
+                    placeholder="e.g. Well done" 
+                    #contents="ngForm"
+                    [class.is-valid]="contents.dirty && contents.valid" 
+                    [class.is-invalid]="contents.dirty && !contents.valid" 
+                    [(ngModel)]="comment.contents" 
+                    ngControl="contents" 
+                    required>
+                </textarea>
+            </div>
+            <attachments [(attachments)]="comment.attachments" [canEdit]="true"></attachments>
+            <p *ngIf="error != null" class="error mt-3">{{ error }}</p>
+            <div class="actions">
+                <material-button 
+                    [disabled]="!form.valid" 
+                    raised 
+                    class="btn btn-primary" 
+                    (trigger)="onSubmit()">
+                    <i class="fa fa-check mr-2"></i>Submit
+                </material-button>
+                <material-button flat (trigger)="onCancel()">Cancel</material-button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay"></div>

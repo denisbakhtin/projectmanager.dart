@@ -1,0 +1,8 @@
+<nav *ngIf="breadcrumbs != null" class="breadcrumb-nav">
+    <ol class="breadcrumb">
+        <li *ngFor="let b of breadcrumbs" class="breadcrumb-item" [class.active]="b.url == ''">
+            <a *ngIf="b.url != ''" [routerLink]="b.url">{{b.title}}</a>
+            <span *ngIf="b.url == ''">{{b.title}}</span>
+        </li>
+    </ol>
+</nav>

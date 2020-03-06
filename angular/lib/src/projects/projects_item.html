@@ -1,0 +1,33 @@
+<li>
+    <div class="item-description">
+        <h3 class="item-title">
+            <a [routerLink]="projectUrl()">{{project.title}}</a>
+            <a *ngIf="project.category?.title != null" [routerLink]="categoryUrl(project.category)" class="badge badge-secondary"><i class="fa fa-tag mr-1"></i>{{project.category.title}}</a>
+            <span class="badge">Open</span>
+        </h3>
+        <div class="dates">
+            <span class="created-at date"><span class="fa fa-calendar"></span>Created on {{helpers.dateString(project.createdAt)}}</span>
+            <span class="expires-at date ml-3"><span class="fa fa-calendar"></span>Expires on {{helpers.dateString(project.createdAt)}}</span>
+        </div>
+    </div>
+    <div class="buttons">
+        <material-button class="btn btn-primary btn-round" raised (trigger)="view()">
+            Manage Tasks 
+            <span class="badge badge-primary ml-2">{{project.tasks.length}}</span>
+        </material-button>
+        <material-button 
+            icon 
+            class="btn btn-default" 
+            (trigger)="startEdit()">
+            <i class="fa fa-edit"></i>
+        </material-button>
+        <material-button 
+            icon 
+            class="btn btn-default" 
+            (trigger)="delete()">
+            <i class="fa fa-trash-o"></i>
+        </material-button>
+    </div>
+</li>
+
+<edit-project-modal *ngIf="showEditModal" [id]="project.id" [onSubmitCallback]="submitEdit" [onCancelCallback]="cancelEdit"></edit-project-modal>

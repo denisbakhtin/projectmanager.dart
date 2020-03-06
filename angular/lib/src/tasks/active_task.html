@@ -1,0 +1,5 @@
+<div *ngIf="activity != null" class="active-task">
+    <div class="content pointer" (click)="view()" title="{{activity.task.contents}}">{{activity.task.contents}}</div>
+    <div *ngIf="activity.spent.inMinutes > 0" class="spent-time">{{activity.spent}}</div>
+    <material-button (click)="stop()"><material-icon icon="stop"></material-icon></material-button>
+</div>

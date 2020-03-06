@@ -1,0 +1,40 @@
+<breadcrumb [section]="'Time Spent Report'"></breadcrumb>
+
+<h3 class="title">Time Spent Report</h3>
+
+<div class="project" *ngFor="let p of projects">
+    <div class="spent-report-box dashboard-box mb-4">
+        <h5 class="strong"><a [routerLink]="projectUrl(p)">{{p.title}} <small class="text-muted">project</small></a></h5>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th class="shrink">Spent</th>
+            </tr>
+            </thead>
+            <tr *ngFor="let t of p.tasks">
+                <td><a [routerLink]="taskUrl(t)">{{t.contents}}</a></td>
+                <td class="shrink">{{t.spentTotal}}</td>
+            </tr>
+            <tfoot>
+            <tr>
+                <th>Total spent</th>
+                <th class="shrink">{{p.spentTotal}}</th>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="dashboard-box spent-total">
+    <table class="w-100">
+        <tr>
+            <td>
+                Total spent on all projects
+            </td>
+            <td class="shrink">
+                <mark class="ml-2">{{spentTotal.toStringFull()}}</mark>
+            </td>
+        </tr>
+    </table>
+</div>
